@@ -1,0 +1,116 @@
+// helper
+html
+	box-sizing: border-box
+	font-size: 62.5%
+
+*
+	padding: 0
+	margin: 0
+	-webkit-font-smoothing: antialiased
+	-moz-osx-font-smoothing: grayscale
+	box-sizing: inherit
+	&::after, &::before
+		box-sizing: inherit
+
+// colors
+$red: #e74c3c
+$orange: #e67e22
+$green: #2ecc71
+$blue: #3498db
+$white: #fff
+
+$dark-blue-light: #34495e
+$dark-blue-heavy: #2c3e50
+
+.bg-transparent
+	background-color: transparent !important
+.bg-red
+	background-color: $red !important
+.bg-orange
+	background-color: $orange !important
+.bg-green
+	background-color: $green !important
+
+// mixins
+%center
+	position: absolute
+	top: 50%
+	left: 50%
+	transform: translate(-50%, -50%)
+
+=size($w, $h)
+	width: $w
+	height: $h
+
+=font-size($sizeValue: 1.6)
+	font-size: ($sizeValue * 10) + px
+	font-size: $sizeValue + rem
+
+
+// styles
+body
+	background-color: $blue
+	.password-wrapper
+		@extend %center
+		width: 80%
+		max-width: 320px
+		border-radius: 5px
+		background-color: $white
+		overflow: hidden
+		.input
+			border: none
+			padding: 10px 15px
+			font: small-caption	
+			+font-size(1.8)
+			width: calc(100% - 50px)
+			color: $dark-blue-light
+			outline: none
+			line-height: 1.5
+		.icon-wrapper
+			position: relative
+			display: inline
+			float: right
+			+size(50px, 50px)
+			background-color: $dark-blue-light
+			transition: background-color .25s ease-out
+			cursor: pointer
+			.ion-eye,
+			.ion-more
+				+font-size(2.6)
+				position: absolute
+				top: 11px
+				right: 12px
+				color: #ccc
+				transition: color .25s ease-out
+			.ion-more
+				right: 14px
+			&:hover
+				transition: background-color .25s ease-out
+				background-color: $dark-blue-heavy
+				.ion-eye, 
+				.ion-more
+					color: $blue
+					transition: color .25s ease-in
+
+		.strength-lines
+			position: absolute
+			bottom: 2px
+			left: 0
+			right: 0
+			+size(calc(100% - 50px), 6px)
+			z-index: 3
+			.line
+				position: absolute
+				background-color: transparent
+				height: 6px
+				border-radius: 2px
+				transition: background-color 0.25s ease-in
+				&:not(:first-of-type):not(:last-of-type)
+					left: 33%
+					right: 33%
+				&:first-of-type
+					left: 4px
+					right: 68%
+				&:last-of-type
+					left: 68%
+					right: 4px
